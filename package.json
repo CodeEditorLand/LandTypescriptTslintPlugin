@@ -1,23 +1,9 @@
 {
   "name": "vscode-typescript-tslint-plugin",
+  "displayName": "TSLint",
   "version": "0.0.1",
   "private": "false",
-  "displayName": "TSLint",
   "description": "TSLint support for Visual Studio Code",
-  "publisher": "ms-vscode",
-  "icon": "docs/icon.png",
-  "license": "MIT",
-  "galleryBanner": {
-    "color": "#fcfcfc",
-    "theme": "light"
-  },
-  "repository": {
-    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git",
-    "type": "git"
-  },
-  "bugs": {
-    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
-  },
   "categories": [
     "Programming Languages"
   ],
@@ -28,78 +14,43 @@
     "ts",
     "linters"
   ],
-  "engines": {
-    "vscode": "1.32.0"
+  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
+  "bugs": {
+    "url": "https://github.com/CodeEditorLand/CodeEditorLand/issues"
   },
-  "activationEvents": [
-    "onLanguage:javascript",
-    "onLanguage:javascriptreact",
-    "onLanguage:typescript",
-    "onLanguage:typescriptreact",
-    "onCommand:tslint.manageWorkspaceLibraryExecution",
-    "onCommand:tslint.resetWorkspaceLibraryExecution"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeEditorLand/CodeEditorLand.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Nikola Hristov",
+    "email": "nikola@nikolahristov.tech",
+    "url": "https://nikolahristov.tech"
+  },
+  "publisher": "playform",
+  "type": "module",
   "main": "./out/index.js",
+  "scripts": {
+    "compile": "tsc -p ./",
+    "lint": "tslint -c tslint.json -p .",
+    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts",
+    "vscode:prepublish": "npm run compile",
+    "watch": "tsc -w -p ./"
+  },
   "contributes": {
-    "jsonValidation": [
+    "commands": [
       {
-        "fileMatch": "tslint.json",
-        "url": "http://json.schemastore.org/tslint"
+        "command": "tslint.manageWorkspaceLibraryExecution",
+        "title": "Manage workspace library execution",
+        "category": "TSLint",
+        "enablement": "editorLangId == typescript || editorLangId == typescriptreact"
       },
       {
-        "fileMatch": "jsconfig*.json",
-        "url": "./schemas/tsconfig.schema.json"
-      },
-      {
-        "fileMatch": "tsconfig*.json",
-        "url": "./schemas/tsconfig.schema.json"
-      }
-    ],
-    "problemPatterns": [
-      {
-        "name": "tslint4",
-        "regexp": "^(\\(\\S*\\)\\s+)?(\\S.*)\\[(\\d+), (\\d+)\\]:\\s+(.*)$",
-        "file": 2,
-        "line": 3,
-        "column": 4,
-        "message": 5
-      },
-      {
-        "name": "tslint5",
-        "regexp": "^(WARNING|ERROR):(\\s+\\(\\S*\\))?\\s+(\\S.*)(:|\\[)(\\d+)(:|, )(\\d+)(\\]:\\s+|\\s+-\\s+)(.*)$",
-        "severity": 1,
-        "file": 3,
-        "line": 5,
-        "column": 7,
-        "message": 9
-      }
-    ],
-    "problemMatchers": [
-      {
-        "name": "tslint4",
-        "label": "tslint (version 4) warnings",
-        "owner": "tslint",
-        "source": "tslint",
-        "applyTo": "closedDocuments",
-        "fileLocation": "absolute",
-        "severity": "warning",
-        "pattern": "$tslint4"
-      },
-      {
-        "name": "tslint5",
-        "owner": "tslint",
-        "source": "tslint",
-        "label": "tslint (version 5) warnings",
-        "applyTo": "closedDocuments",
-        "fileLocation": "absolute",
-        "severity": "warning",
-        "pattern": "$tslint5"
-      }
-    ],
-    "typescriptServerPlugins": [
-      {
-        "name": "typescript-tslint-plugin",
-        "enableForWorkspaceTypeScriptVersions": true
+        "command": "tslint.resetWorkspaceLibraryExecution",
+        "title": "Reset workspace library execution",
+        "category": "TSLint",
+        "enablement": "editorLangId == typescript || editorLangId == typescriptreact"
       }
     ],
     "configuration": {
@@ -153,28 +104,76 @@
         }
       }
     },
-    "commands": [
+    "jsonValidation": [
       {
-        "command": "tslint.manageWorkspaceLibraryExecution",
-        "title": "Manage workspace library execution",
-        "category": "TSLint",
-        "enablement": "editorLangId == typescript || editorLangId == typescriptreact"
+        "fileMatch": "tslint.json",
+        "url": "http://json.schemastore.org/tslint"
       },
       {
-        "command": "tslint.resetWorkspaceLibraryExecution",
-        "title": "Reset workspace library execution",
-        "category": "TSLint",
-        "enablement": "editorLangId == typescript || editorLangId == typescriptreact"
+        "fileMatch": "jsconfig*.json",
+        "url": "./schemas/tsconfig.schema.json"
+      },
+      {
+        "fileMatch": "tsconfig*.json",
+        "url": "./schemas/tsconfig.schema.json"
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "tslint4",
+        "label": "tslint (version 4) warnings",
+        "owner": "tslint",
+        "source": "tslint",
+        "applyTo": "closedDocuments",
+        "fileLocation": "absolute",
+        "severity": "warning",
+        "pattern": "$tslint4"
+      },
+      {
+        "name": "tslint5",
+        "owner": "tslint",
+        "source": "tslint",
+        "label": "tslint (version 5) warnings",
+        "applyTo": "closedDocuments",
+        "fileLocation": "absolute",
+        "severity": "warning",
+        "pattern": "$tslint5"
+      }
+    ],
+    "problemPatterns": [
+      {
+        "name": "tslint4",
+        "regexp": "^(\\(\\S*\\)\\s+)?(\\S.*)\\[(\\d+), (\\d+)\\]:\\s+(.*)$",
+        "file": 2,
+        "line": 3,
+        "column": 4,
+        "message": 5
+      },
+      {
+        "name": "tslint5",
+        "regexp": "^(WARNING|ERROR):(\\s+\\(\\S*\\))?\\s+(\\S.*)(:|\\[)(\\d+)(:|, )(\\d+)(\\]:\\s+|\\s+-\\s+)(.*)$",
+        "severity": 1,
+        "file": 3,
+        "line": 5,
+        "column": 7,
+        "message": 9
+      }
+    ],
+    "typescriptServerPlugins": [
+      {
+        "name": "typescript-tslint-plugin",
+        "enableForWorkspaceTypeScriptVersions": true
       }
     ]
   },
-  "scripts": {
-    "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -w -p ./",
-    "lint": "tslint -c tslint.json -p .",
-    "prepublishOnly": "TypeScriptESBuild Source/**/*.ts"
-  },
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact",
+    "onCommand:tslint.manageWorkspaceLibraryExecution",
+    "onCommand:tslint.resetWorkspaceLibraryExecution"
+  ],
   "dependencies": {
     "typescript-tslint-plugin": "1.0.2"
   },
@@ -184,14 +183,15 @@
     "typescript": "5.2.2",
     "typescript-esbuild": "0.3.1"
   },
-  "homepage": "https://github.com/CodeEditorLand/CodeEditorLand#readme",
-  "type": "module",
+  "engines": {
+    "vscode": "1.32.0"
+  },
   "publishConfig": {
     "access": "public"
   },
-  "author": {
-    "name": "Nikola Hristov",
-    "email": "nikola@nikolahristov.tech",
-    "url": "https://nikolahristov.tech"
+  "icon": "docs/icon.png",
+  "galleryBanner": {
+    "color": "#fcfcfc",
+    "theme": "light"
   }
 }
