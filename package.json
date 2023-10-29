@@ -28,7 +28,7 @@
         "linters"
     ],
     "engines": {
-        "vscode": "^1.32.0"
+        "vscode": "1.32.0"
     },
     "activationEvents": [
         "onLanguage:javascript",
@@ -177,8 +177,8 @@
         "typescript-tslint-plugin": "1.0.2"
     },
     "devDependencies": {
-        "@types/vscode": "^1.32.0",
-        "tslint": "^6.1.0",
-        "typescript": "^4.0.5"
+        "@types/vscode": "1.83.1",
+        "tslint": "6.1.0",
+        "typescript": "5.2.2"
     }
 }
