@@ -1,19 +1,14 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2016",
-        "jsx": "preserve",
-        "strict": true,
-        "noUnusedLocals": true,
-        "forceConsistentCasingInFileNames": true,
-        "outDir": "./out",
-        "sourceMap": true
-    },
-    "include": [
-        "./src/**/*.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/node_modules/*"
-    ]
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es2016",
+		"jsx": "preserve",
+		"strict": true,
+		"noUnusedLocals": true,
+		"forceConsistentCasingInFileNames": true,
+		"outDir": "./out",
+		"sourceMap": true
+	},
+	"include": ["./src/**/*.ts"],
+	"exclude": ["node_modules", "**/node_modules/*"]
 }
