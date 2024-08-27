@@ -14,7 +14,7 @@ Adds [tslint](https://github.com/palantir/tslint) to VS Code using the
 Please refer to the [tslint documentation](https://github.com/palantir/tslint)
 for how to configure the linting rules.
 
-## Usage
+## 🛠️ Usage
 
 > ❗ **Important**: If you also have the [vscode-tslint][vscode-tslint]
 > extension in VS Code installed, please disable it to avoid linting files
