@@ -1,11 +1,12 @@
 {
-	"name": "vscode-typescript-tslint-plugin",
-	"displayName": "TSLint",
-	"description": "TSLint support for Visual Studio Code",
-	"main": "./out/index.js",
-	"scripts": {
-		"compile": "tsc -p ./"
-	},
+	"activationEvents": [
+		"onLanguage:javascript",
+		"onLanguage:javascriptreact",
+		"onLanguage:typescript",
+		"onLanguage:typescriptreact",
+		"onCommand:tslint.manageWorkspaceLibraryExecution",
+		"onCommand:tslint.resetWorkspaceLibraryExecution"
+	],
 	"contributes": {
 		"commands": [
 			{
@@ -134,21 +135,20 @@
 			}
 		]
 	},
-	"activationEvents": [
-		"onLanguage:javascript",
-		"onLanguage:javascriptreact",
-		"onLanguage:typescript",
-		"onLanguage:typescriptreact",
-		"onCommand:tslint.manageWorkspaceLibraryExecution",
-		"onCommand:tslint.resetWorkspaceLibraryExecution"
-	],
 	"dependencies": {
 		"typescript-tslint-plugin": "1.0.2"
 	},
+	"description": "TSLint support for Visual Studio Code",
 	"devDependencies": {},
-	"icon": "docs/icon.png",
+	"displayName": "TSLint",
 	"galleryBanner": {
 		"color": "#fcfcfc",
 		"theme": "light"
+	},
+	"icon": "docs/icon.png",
+	"main": "./out/index.js",
+	"name": "vscode-typescript-tslint-plugin",
+	"scripts": {
+		"compile": "tsc -p ./"
 	}
 }
