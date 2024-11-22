@@ -29,6 +29,7 @@ export class TsLintConfigurationStatusBarWarning {
 					title: "Help",
 					isCloseAffordance: true,
 				};
+
 				const close: vscode.MessageItem = {
 					title: "Close",
 					isCloseAffordance: true,
@@ -71,6 +72,7 @@ export class TsLintConfigurationStatusBarWarning {
 						this._updateForActiveEditor(
 							vscode.window.activeTextEditor,
 						);
+
 						break;
 					}
 				}
@@ -101,19 +103,23 @@ export class TsLintConfigurationStatusBarWarning {
 		this._activeDocument = activeTextEditor
 			? activeTextEditor.document.uri
 			: undefined;
+
 		if (!activeTextEditor) {
 			this._statusBarItem.hide();
+
 			return;
 		}
 
 		if (!shouldBeLinted(activeTextEditor.document)) {
 			this._statusBarItem.hide();
+
 			return;
 		}
 
 		const diagnostics = vscode.languages.getDiagnostics(
 			activeTextEditor.document.uri,
 		);
+
 		const failedToLoadError = diagnostics.find(
 			(diagnostic) =>
 				diagnostic.source === "tslint" &&

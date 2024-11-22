@@ -22,11 +22,13 @@ async function getTsLintFixAllCodeAction(
 			document.uri,
 			diagnostic.range,
 		);
+
 		if (codeActions) {
 			const fixAll = codeActions.filter(
 				(action) =>
 					action.title === "Fix all auto-fixable tslint failures",
 			);
+
 			if (fixAll.length > 0) {
 				return fixAll[0];
 			}
@@ -65,6 +67,7 @@ export class FixAllProvider implements vscode.CodeActionProvider {
 		}
 
 		const fixAllAction = await getTsLintFixAllCodeAction(document);
+
 		if (!fixAllAction) {
 			return [];
 		}

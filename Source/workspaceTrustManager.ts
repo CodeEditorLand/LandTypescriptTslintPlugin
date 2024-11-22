@@ -49,6 +49,7 @@ export class WorkspaceLibraryExecutionManager {
 		const global = this.globalMemento.get<boolean>(
 			this.isTrustedGloballyKey,
 		);
+
 		if (global) {
 			return true;
 		}
@@ -103,6 +104,7 @@ export class WorkspaceLibraryExecutionManager {
 					true,
 				);
 				this._onDidChange.fire();
+
 				break;
 
 			case untrustItem:
@@ -111,6 +113,7 @@ export class WorkspaceLibraryExecutionManager {
 					false,
 				);
 				this._onDidChange.fire();
+
 				break;
 
 			case trustGloballyItem:
@@ -119,6 +122,7 @@ export class WorkspaceLibraryExecutionManager {
 					true,
 				);
 				this._onDidChange.fire();
+
 				break;
 
 			case helpItem:
@@ -127,6 +131,7 @@ export class WorkspaceLibraryExecutionManager {
 						"https://github.com/microsoft/typescript-tslint-plugin#readme",
 					),
 				);
+
 				break;
 		}
 	}

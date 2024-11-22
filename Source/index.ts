@@ -5,7 +5,9 @@ import { TsLintConfigurationStatusBarWarning } from "./warningStatusBar";
 import { WorkspaceLibraryExecutionManager } from "./workspaceTrustManager";
 
 const typeScriptExtensionId = "vscode.typescript-language-features";
+
 const pluginId = "typescript-tslint-plugin";
+
 const configurationSection = "tslint";
 
 interface SynchronizedConfiguration {
@@ -22,15 +24,18 @@ interface SynchronizedConfiguration {
 
 export async function activate(context: vscode.ExtensionContext) {
 	const extension = vscode.extensions.getExtension(typeScriptExtensionId);
+
 	if (!extension) {
 		return;
 	}
 
 	await extension.activate();
+
 	if (!extension.exports || !extension.exports.getAPI) {
 		return;
 	}
 	const api = extension.exports.getAPI(0);
+
 	if (!api) {
 		return;
 	}
@@ -54,6 +59,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	);
 
 	const selector: vscode.DocumentFilter[] = [];
+
 	for (const language of [
 		"javascript",
 		"javascriptreact",
@@ -90,6 +96,7 @@ function getConfiguration(
 	workspaceLibraryExecutionManager: WorkspaceLibraryExecutionManager,
 ): SynchronizedConfiguration {
 	const config = vscode.workspace.getConfiguration(configurationSection);
+
 	const outConfig: SynchronizedConfiguration = {};
 
 	withConfigValue(config, outConfig, "alwaysShowRuleFailuresAsWarnings");
@@ -112,6 +119,7 @@ function withConfigValue<C, K extends Extract<keyof C, string>>(
 	key: K,
 ): void {
 	const configSetting = config.inspect<C[K]>(key);
+
 	if (!configSetting) {
 		return;
 	}
@@ -130,6 +138,7 @@ function withConfigValue<C, K extends Extract<keyof C, string>>(
 		key,
 		undefined,
 	);
+
 	if (typeof value !== "undefined") {
 		(outConfig as any)[key] = value;
 	}

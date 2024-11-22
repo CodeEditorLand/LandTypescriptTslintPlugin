@@ -18,6 +18,7 @@ export function isEnabledForJavaScriptDocument(document: TextDocument) {
 	const isJsEnable = workspace
 		.getConfiguration("tslint", document.uri)
 		.get("jsEnable", true);
+
 	if (isJsEnable && isJavaScriptDocument(document)) {
 		return true;
 	}
