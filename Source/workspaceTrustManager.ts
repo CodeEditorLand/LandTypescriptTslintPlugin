@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 
 export const manageWorkspaceTrustCommand =
 	"tslint.manageWorkspaceLibraryExecution";
+
 export const resetWorkspaceTrustCommand =
 	"tslint.resetWorkspaceLibraryExecution";
 
