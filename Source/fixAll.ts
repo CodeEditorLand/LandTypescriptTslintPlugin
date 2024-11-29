@@ -34,6 +34,7 @@ async function getTsLintFixAllCodeAction(
 			}
 		}
 	}
+
 	return undefined;
 }
 

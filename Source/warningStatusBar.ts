@@ -9,6 +9,7 @@ export class TsLintConfigurationStatusBarWarning {
 	private readonly workspaceTrustManager: WorkspaceLibraryExecutionManager;
 
 	private _disposables: vscode.Disposable[] = [];
+
 	private readonly _statusBarItem: vscode.StatusBarItem;
 
 	private _activeDocument: vscode.Uri | undefined = undefined;
@@ -60,6 +61,7 @@ export class TsLintConfigurationStatusBarWarning {
 			vscode.StatusBarAlignment.Right,
 			0,
 		);
+
 		this._statusBarItem.command = this.showHelpCommand;
 
 		vscode.languages.onDidChangeDiagnostics(
@@ -67,6 +69,7 @@ export class TsLintConfigurationStatusBarWarning {
 				if (!this._activeDocument || !vscode.window.activeTextEditor) {
 					return;
 				}
+
 				for (const uri of e.uris) {
 					if (uri.fsPath === this._activeDocument.fsPath) {
 						this._updateForActiveEditor(
@@ -86,6 +89,7 @@ export class TsLintConfigurationStatusBarWarning {
 			this,
 			this._disposables,
 		);
+
 		this._updateForActiveEditor(vscode.window.activeTextEditor);
 	}
 
@@ -93,7 +97,9 @@ export class TsLintConfigurationStatusBarWarning {
 		for (const disposable of this._disposables) {
 			disposable.dispose();
 		}
+
 		this._disposables = [];
+
 		this._statusBarItem.dispose();
 	}
 
@@ -138,15 +144,19 @@ export class TsLintConfigurationStatusBarWarning {
 
 		if (failedToLoadError || notUsingWorkspaceVersionError) {
 			this._statusBarItem.text = "$(circle-slash) TSLint";
+
 			this._statusBarItem.color = new vscode.ThemeColor(
 				"errorForeground",
 			);
+
 			this._statusBarItem.tooltip =
 				failedToLoadError?.message ??
 				notUsingWorkspaceVersionError?.message;
+
 			this._statusBarItem.show();
 		} else {
 			this._statusBarItem.text = "TSLint";
+
 			this._statusBarItem.hide();
 		}
 	}

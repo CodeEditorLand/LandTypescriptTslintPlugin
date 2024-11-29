@@ -8,22 +8,27 @@ export const resetWorkspaceTrustCommand =
 
 export class WorkspaceLibraryExecutionManager {
 	private readonly isTrustedWorkspaceKey = "tslint.isTrustedWorkspace";
+
 	private readonly isTrustedGloballyKey =
 		"tslint.allowGlobalLibraryExecution";
 
 	private _disposables: vscode.Disposable[] = [];
 
 	private readonly _onDidChange = new vscode.EventEmitter<void>();
+
 	public readonly onDidChange = this._onDidChange.event;
 
 	private readonly globalMemento: vscode.Memento;
+
 	private readonly workspaceMemento: vscode.Memento;
 
 	constructor(context: {
 		globalState: vscode.Memento;
+
 		workspaceState: vscode.Memento;
 	}) {
 		this.globalMemento = context.globalState;
+
 		this.workspaceMemento = context.workspaceState;
 
 		this._disposables.push(
@@ -43,6 +48,7 @@ export class WorkspaceLibraryExecutionManager {
 		for (const disposable of this._disposables) {
 			disposable.dispose();
 		}
+
 		this._disposables = [];
 	}
 
@@ -54,6 +60,7 @@ export class WorkspaceLibraryExecutionManager {
 		if (global) {
 			return true;
 		}
+
 		return this.workspaceMemento.get<boolean>(this.isTrustedWorkspaceKey);
 	}
 
@@ -104,6 +111,7 @@ export class WorkspaceLibraryExecutionManager {
 					this.isTrustedWorkspaceKey,
 					true,
 				);
+
 				this._onDidChange.fire();
 
 				break;
@@ -113,6 +121,7 @@ export class WorkspaceLibraryExecutionManager {
 					this.isTrustedWorkspaceKey,
 					false,
 				);
+
 				this._onDidChange.fire();
 
 				break;
@@ -122,6 +131,7 @@ export class WorkspaceLibraryExecutionManager {
 					this.isTrustedGloballyKey,
 					true,
 				);
+
 				this._onDidChange.fire();
 
 				break;
@@ -139,7 +149,9 @@ export class WorkspaceLibraryExecutionManager {
 
 	private reset() {
 		this.globalMemento.update(this.isTrustedGloballyKey, undefined);
+
 		this.workspaceMemento.update(this.isTrustedWorkspaceKey, undefined);
+
 		this._onDidChange.fire();
 	}
 }

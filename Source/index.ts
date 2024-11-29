@@ -12,11 +12,17 @@ const configurationSection = "tslint";
 
 interface SynchronizedConfiguration {
 	alwaysShowRuleFailuresAsWarnings?: boolean;
+
 	ignoreDefinitionFiles?: boolean;
+
 	configFile?: string;
+
 	suppressWhileTypeErrorsPresent?: boolean;
+
 	jsEnable?: boolean;
+
 	exclude?: string | string[];
+
 	packageManager?: "npm" | "pnpm" | "yarn";
 
 	allowWorkspaceLibraryExecution?: boolean;
@@ -34,6 +40,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	if (!extension.exports || !extension.exports.getAPI) {
 		return;
 	}
+
 	const api = extension.exports.getAPI(0);
 
 	if (!api) {
@@ -41,10 +48,12 @@ export async function activate(context: vscode.ExtensionContext) {
 	}
 
 	const workspaceTrustManager = new WorkspaceLibraryExecutionManager(context);
+
 	context.subscriptions.push(workspaceTrustManager);
 
 	workspaceTrustManager.onDidChange(() => {
 		synchronizeConfiguration(api, workspaceTrustManager);
+
 		vscode.commands.executeCommand("typescript.restartTsServer");
 	});
 
@@ -67,6 +76,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		"typescriptreact",
 	]) {
 		selector.push({ language, scheme: "file" });
+
 		selector.push({ language, scheme: "untitled" });
 	}
 
@@ -100,11 +110,17 @@ function getConfiguration(
 	const outConfig: SynchronizedConfiguration = {};
 
 	withConfigValue(config, outConfig, "alwaysShowRuleFailuresAsWarnings");
+
 	withConfigValue(config, outConfig, "ignoreDefinitionFiles");
+
 	withConfigValue(config, outConfig, "suppressWhileTypeErrorsPresent");
+
 	withConfigValue(config, outConfig, "jsEnable");
+
 	withConfigValue(config, outConfig, "configFile");
+
 	withConfigValue(config, outConfig, "exclude");
+
 	withConfigValue(config, outConfig, "packageManager");
 
 	outConfig.allowWorkspaceLibraryExecution =

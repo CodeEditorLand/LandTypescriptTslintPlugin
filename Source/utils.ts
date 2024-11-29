@@ -22,6 +22,7 @@ export function isEnabledForJavaScriptDocument(document: TextDocument) {
 	if (isJsEnable && isJavaScriptDocument(document)) {
 		return true;
 	}
+
 	return false;
 }
 
